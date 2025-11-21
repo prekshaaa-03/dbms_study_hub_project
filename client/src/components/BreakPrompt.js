@@ -46,17 +46,16 @@ const BreakPrompt = () => {
   const { text, url } = updateFlashcard();
 
   const handleLogout = () => {
-    // Clear authentication data
+
     localStorage.removeItem('authToken');
     sessionStorage.removeItem('authToken');
-    
-    // Redirect user to the login page
+
     window.location.href = '/login';
   };
 
   return (
     <div>
-      {/* Header Section */}
+
       <header className="dashboard-header">
         <div className="logo">Lock In.</div>
         <nav className="nav-links">
@@ -68,20 +67,16 @@ const BreakPrompt = () => {
         </nav>
       </header>
 
-      {/* Title */}
       <h1>Take a break!</h1>
 
-      {/* Flashcard Container */}
       <div className="flashcard-container">
-        {/* Backward arrow */}
+
         <button className="arrow" onClick={handleBackward}>&#8592;</button>
 
-        {/* Flashcard Area */}
         <div className="flashcard" onClick={() => window.open(url, '_blank')}>
           {text}
         </div>
 
-        {/* Forward arrow */}
         <button className="arrow" onClick={handleForward}>&#8594;</button>
       </div>
     </div>

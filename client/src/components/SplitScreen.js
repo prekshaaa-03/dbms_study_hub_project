@@ -5,7 +5,7 @@ import './SplitScreen.css';
 const SplitScreen = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const initialTime = parseInt(new URLSearchParams(location.search).get('time')) || 600; // Set initial time
+  const initialTime = parseInt(new URLSearchParams(location.search).get('time')) || 600; 
   const [remainingTime, setRemainingTime] = useState(initialTime);
   const [timerInterval, setTimerInterval] = useState(null);
   const [isSessionEnded, setIsSessionEnded] = useState(false);
@@ -14,9 +14,7 @@ const SplitScreen = () => {
   const [taskName, setTaskName] = useState(new URLSearchParams(location.search).get('task') || '');
   const [timerDisplay, setTimerDisplay] = useState('');
   const [pdfSrc, setPdfSrc] = useState('');
-  const [noteText, setNoteText] = useState('');  // Store notes
-
-  // Color Theme
+  const [noteText, setNoteText] = useState(''); 
   const colors = {
     Planetary: '#334EAC',
     Venus: '#BAD6EB',
@@ -26,14 +24,11 @@ const SplitScreen = () => {
     Galaxy: '#081F5C',
     Sky: '#D0E3FF'
   };
-
-  // Preload bell sound
   useEffect(() => {
     const audio = new Audio('./bell.mp3');
     setBellSound(audio);
   }, []);
 
-  // Handle PDF file upload
   const loadPDF = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -41,7 +36,6 @@ const SplitScreen = () => {
     }
   };
 
-  // Start the timer and update it every second
   useEffect(() => {
     const updateTimer = () => {
       if (remainingTime > 0) {
@@ -53,12 +47,10 @@ const SplitScreen = () => {
         clearInterval(timerInterval);
         setIsSessionEnded(true);
 
-        // Play bell sound once
         if (bellSound) {
           bellSound.play();
         }
 
-        // Show congratulations modal
         setShowCongratulationsModal(true);
       }
     };
@@ -66,22 +58,22 @@ const SplitScreen = () => {
     const interval = setInterval(updateTimer, 1000);
     setTimerInterval(interval);
 
-    return () => clearInterval(interval); // Cleanup the interval on component unmount
+    return () => clearInterval(interval); 
   }, [remainingTime, bellSound]);
 
   const handleContinue = () => {
-    // Restore the initial time when continue is clicked
+    
     setRemainingTime(initialTime);
     setIsSessionEnded(false);
     setShowCongratulationsModal(false);
   };
 
   const handleBreak = () => {
-    // Navigate to break prompt page
+    
     navigate('/breakprompt');
   };
 
-  // Function to download notes as a .txt file
+  
   const downloadNotes = () => {
     const blob = new Blob([noteText], { type: 'text/plain' });
     const link = document.createElement('a');
@@ -90,12 +82,11 @@ const SplitScreen = () => {
     link.click();
   };
 
-  // Toggle fullscreen mode
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();  // Request fullscreen
+      document.documentElement.requestFullscreen(); 
     } else {
-      document.exitFullscreen();  // Exit fullscreen
+      document.exitFullscreen(); 
     }
   };
 
@@ -135,7 +126,7 @@ const SplitScreen = () => {
           className="editable-content"
           id="notes-textarea"
           placeholder="Take your notes here..."
-          onInput={(e) => setNoteText(e.target.innerText)} // Update notes on input
+          onInput={(e) => setNoteText(e.target.innerText)}
         ></div>
 
         <button 

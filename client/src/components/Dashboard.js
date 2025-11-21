@@ -16,10 +16,10 @@ const Dashboard = () => {
 
 
   const logout = () => {
-    // Clear any authentication state (e.g., token, user info)
-    localStorage.removeItem('user');  // Example: clear user data from localStorage
+    
+    localStorage.removeItem('user');  
     toast.info('You have been logged out.');
-    navigate('/login');  // Navigate to login page after logging out
+    navigate('/login');  
   };
 
   const startSession = async () => {
@@ -40,16 +40,13 @@ const Dashboard = () => {
           taskName,
           studyDateTime,
           completed: false,
-          id: new Date().getTime(), // Unique ID for the task (timestamp)
+          id: new Date().getTime(), 
         };
-    
-        // Retrieve existing tasks from localStorage
+
         const tasks = JSON.parse(localStorage.getItem('studyTasks')) || [];
-    
-        // Add the new task to the array
+
         tasks.push(newTask);
     
-        // Save the updated tasks array back to localStorage
         localStorage.setItem('studyTasks', JSON.stringify(tasks));
     
           toast.success(`Scheduled task: ${taskName} for ${studyDate} at ${studyHour}:${studyMinute} ${amPm}`);
@@ -62,34 +59,30 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      {/* Header */}
+
       <header className="dashboard-header">
         <div className="logo">Lock In.</div>
         <nav className="nav-links">
           <div className="profile">
-            {/* Door-shaped button with an arrow icon */}
+
             <button className="logout-btn" onClick={logout}>Logout</button>
           </div>
         </nav>
       </header>
 
-      {/* Content */}
       <div className="content-sections">
-        {/* Calendar */}
         <section className="section-content" onClick={() => navigate('/calendar')}>
           <h2>Calendar</h2>
           <img src={calendarImage} alt="Calendar" />
           <p>Click here to view your calendar.</p>
         </section>
 
-        {/* Library */}
         <section className="section-content" onClick={() => navigate('/library')}>
           <h2>Library</h2>
           <img src={libraryImage} alt="Library" />
           <p>Upload & manage your documents.</p>
         </section>
 
-        {/* Study Session */}
         <section className="section-content" id="study-session">
           <h2>Plan Your Study Session</h2>
           <p>Organize your study sessions and set timers for focus.</p>

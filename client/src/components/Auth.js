@@ -37,7 +37,7 @@ function Auth() {
       });
   
       if (res.data.status === "success") {
-        localStorage.setItem("token", res.data.token); // Store token
+        localStorage.setItem("token", res.data.token);
         if (isLogin) {
           navigate("/dashboard");
         } else {
